@@ -1,0 +1,241 @@
+@import '../MenuBtn/MenuBtn.css';
+
+section{
+    width: 1100px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+.main-section {
+    display: flex;
+    gap: 0;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    position: relative;
+    padding: 20px 0 40px 0;
+    min-width: 400px;
+}
+.calendar {
+    width: 500px;
+}
+.calendar-section {
+    width: 40%;
+    border-right: 1px solid #d5d5d5;
+    padding: 0 24px;
+    min-width: 400px;
+}
+
+
+.calendar-tab {
+    background: #EA6946;
+    color: #fff;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    padding: 8px 22px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.calendar-tab.active {
+    background: #EA6946;
+}
+
+.auction-list {
+    flex: 1;
+    padding: 0 32px;
+    /* 배경색, 테두리 등은 필요시 추가 */
+}
+
+.auction-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #d5d5d5;
+    padding-bottom: 12px;
+}
+
+.auction-date {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: #222;
+}
+
+.auction-date .today-label {
+    font-size: 15px;
+    color: #888;
+    font-weight: 400;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.auction-dropdown {
+    font-size: 15px;
+    color: #888;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 8px;
+    white-space: nowrap;
+
+}
+
+.tag-list {
+    margin-bottom: 18px;
+    display: flex;
+    gap: 10px 15px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.tag-btn {
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 16px;
+    padding: 7px 15px 5px 15px;
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+.tag-btn.active {
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+}
+
+.cast-list{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-list-header{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 34px;
+}
+
+.card{
+    width: 249px;
+    overflow: hidden;
+    transition: background-color 1s ease;
+    position: relative;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 195px;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 10px;
+    overflow: hidden;
+    z-index: 0;
+}
+.thumbnail img{
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+    display: block;
+}
+
+.thumbnail::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* 어두운 오버레이 */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail:hover::after {
+    opacity: 1;
+}
+
+.like-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.like-btn .heart-icon {
+    filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #fff);
+    mix-blend-mode: normal;
+}
+
+.heart-icon path {
+    fill: red;
+}
+
+.like-btn.liked .heart-icon path {
+    fill: red !important;
+}
+
+
+.thumbnail:hover .like-btn .heart-icon {
+    filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px #fff);
+}
+
+.cast-state{
+    width:50px;
+    position: absolute;
+    border-radius: 7px;
+    top: 10px;
+    left: 10px;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    padding: 4px 9px
+}
+
+.status-진행예정 {
+    background: #0054ff;
+}
+.status-진행중 {
+    background: #2fcd37;
+}
+.status-종료 {
+    background: red;
+}
+
+.like-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+.auction-count {
+    margin-bottom: 10px;
+}
+
+.info-content{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.guest-count{
+    color: #EA6946;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.host-name {
+    min-width: 30%;
+    font-size: 12px;
+}

@@ -1,0 +1,748 @@
+.contentWrap-upper{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    position:relative;
+}
+
+/*----------------------------*/
+/* 비디오 부분 */
+.videoContent{
+}
+
+.participants{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 45px;
+}
+.participants>.left{
+    display:flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap:5px;
+}
+.participants > .left> .title{
+    font-size:20px;
+    font-weight:700;
+}
+.participants > .left> .guestCount{
+    font-size:15px;
+    font-weight:600;
+}
+
+
+
+
+
+
+
+.videoWrapper{
+    width: 750px;
+}
+
+.main-videoWrapper,
+.videoBox,
+video {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+
+
+
+
+/*--------*/
+/* 서브 화면 부분*/
+.sub-videoWrapper{
+    width:100%;
+    height : 500px; /* 가로세로 비율 고정 */
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    overflow:hidden;
+    padding:0 44px;
+    box-sizing:border-box;
+}
+
+
+/* 참여자 없을 때 문구*/
+.no-participants{
+    font-size:16px;
+    font-weight:600;
+    color:#777;
+    width:100%;
+    text-align: left;
+    padding:10px;
+}
+
+/* 서브화면 화살표 */
+.sub-videos-arrow{
+    width:30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink:0;
+}
+.sub-videos-arrow > img{
+    width:30px;
+    cursor:pointer;
+}
+
+/* 서브 비디오 실제 화면*/
+.sub-videos-container{
+    flex:1;
+    overflow-x:hidden;
+    position:relative;
+    -ms-overflow-style: none;     /* IE, Edge */
+    scrollbar-width: none;        /* Firefox */
+    border:1px solid lightgray;
+}
+
+.sub-videos-container::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera, Edge */
+}
+
+.sub-videos{
+    overflow-y:hidden;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:15px;
+    transition: transform 0.3s ease;
+    will-change:transform;
+}
+.sub-video-content{
+    max-width:200px;
+}
+
+.sub-video{
+    flex-shrink:0;
+    flex-grow:0;
+    width:200px;
+    aspect-ratio: 16 / 9; /* 가로세로 비율 고정 */
+    box-sizing:border-box;
+
+}
+.sub-video > .video{
+    width:100%;
+    aspect-ratio: 16/9;
+    background-color: black;
+}
+.sub-video-content > .userInfo{
+    margin-top:3px;
+}
+
+.sub-video-content > .userInfo> p{
+    font-size:12px;
+    color:black;
+}
+
+
+.videoBox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing:border-box;
+}
+
+.videoBox>video{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit: cover;
+}
+
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 8px;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 14px; /* 고정 px로 안정성 확보 */
+}
+
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.icon-button:hover {
+    color: #00ffcc;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ffcc;
+    border: none;
+    margin-top: -4px;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ffcc;
+    border: none;
+}
+
+.videoBox.small .video-controls {
+    font-size: 12px;
+    padding: 4px 6px;
+    gap: 2px;
+}
+
+
+.videoBox.small .icon-button {
+    font-size: 12px;
+    padding: 2px;
+}
+
+.videoBox.small .volume-slider {
+    width: 50px;
+    height: 3px;
+}
+
+.swap-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255,255,255,0.6);
+    border: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
+    color:black;
+    transition:0.2s ease-out;
+}
+.swap-btn:hover {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.videoBox:hover .swap-btn {
+    display: block;
+}
+
+.chatWrap{
+    /*width:30%;*/
+    width:400px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 5px 0;
+}
+.chatWrap .chatList-wrap{
+    width:80%;
+    margin:0 auto;
+}
+.chatWrap .chatTitle{
+    text-align: center;
+    font-size: 18px;
+    color: #232121;
+}
+.chatWrap .lineMaker{
+    width:100%;
+    border-bottom:1px solid lightgray;
+    margin: 10px 0;
+}
+.chatWrap .userChatList{
+    padding:5px;
+    width:100%;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;        /* x축(가로) 스크롤은 숨김 */
+    -ms-overflow-style: none;  /* IE, Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+.userChatList::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera, Edge */
+}
+.chatWrap .userChat{
+    margin-bottom:2px;
+}
+
+.userChatList .userName{
+    width: 80px;
+    word-break: break-all;
+    font-size: 12px;
+    vertical-align: top;
+}
+.userChatList .chatContent{
+    width:calc(100% - 80px);
+    word-break: break-all;
+    font-size: 12px;
+    vertical-align: top;
+    padding-left:10px;
+}
+
+/* 채팅 입력 부분*/
+.message-Wrap{
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    margin: 0 0 0 45px;
+}
+
+.message-Wrap .message{
+    border: 2px solid transparent; /* 항상 2px 테두리 */
+    padding: 10px 10px;
+    width:260px;
+    border-radius: 4px;
+    background-color: #e8e9eb;
+    outline:none;
+    transition: background 0.2s, border 0.2s;
+    cursor:text;
+    box-sizing:content-box;
+}
+.message-Wrap .message:hover{
+    background-color:#e1e1e5;
+}
+.message-Wrap .message:focus {
+    background: #fff; /* 포커스 시 배경 흰색 */
+    border: 2px solid #6d6e70; /* 포커스 시 테두리 */
+}
+.message-Wrap .chatBtn{
+    background-color: #e1e1e5;
+    color:#6d6e70;
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: not-allowed;;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.message-Wrap .chatBtn.send{
+    background-color: #ea6946;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+/* 서브비디오 아래부분 */
+.contentWrap-under{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    position:relative;
+    margin:10px 0;
+}
+
+.contentWrap-under > .bidInfoWrapper{
+    width: 750px;
+    padding: 0 44px;
+    box-sizing:border-box;
+    margin-top:10px;
+}
+
+.bidInfoWrapper>.bidInfo{
+    display:flex;
+    justify-content: space-between;
+}
+
+.bidInfo >.amountContainer> p>.guide{
+    color:black;
+    font-size:25px;
+    font-weight:600;
+}
+
+.bidInfo> .amountContainer> p> .amount,.bidInfo> .amountContainer> p> .winner{
+    color:#EA6946;
+    font-size:25px;
+    padding-left:2px;
+    font-weight:600;
+}
+
+.amountContainer> p:nth-child(2) >.guide,
+.amountContainer> p:nth-child(2) >.amount,
+.amountContainer> p:nth-child(2) >.winner{
+    font-size:18px;
+}
+
+
+
+.bidInfo > .tagContainer{
+    width:40%;
+}
+.bidInfo > .tagContainer > p{
+    font-weight:600;
+    font-size:18px;
+}
+.bidInfo > .tagContainer > .tagWrap{
+    width:100%;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.bidInfo > .tagContainer > .tagWrap > .tag{
+    padding:5px 12px 4px 12px;
+    background-color:#EA6946;
+    color:white;
+    border-radius:12px;
+    font-size:12px;
+}
+
+.bidInfoWrapper > .sliderWrap{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.sliderWrap > .arrowWrap{
+    width:4.5%;
+}
+.arrowWrap > div > img{
+    width:30px;
+    cursor:pointer;
+    margin-bottom: 85px;
+}
+
+.bidInfoWrapper > .sliderWrap>.bidProdWrap{
+    display:flex;
+    justify-content:flex-start;
+    padding:20px 0 0 0;
+    width:91%;
+    overflow-x:auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width:none;
+    gap: 12px;
+}
+.sliderWrap>.bidProdWrap::-webkit-scrollbar {
+    display: none;
+}
+.bidProdWrap > .bidProdList{
+    min-height:300px;
+}
+
+.bidProdWrap > .bidProdList > .prodName{
+    text-align:center;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.bidProdWrap > .bidProdList > .bidProd-picture{
+    width:186px;
+    aspect-ratio: 16/12;
+    position: relative;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    padding:5px 0 ;
+    overflow-x:hidden;
+}
+.bidProd-picture > img{
+    height:100%;
+}
+
+
+
+.bidProdList.selected >.bidProd-picture  {
+    border: 2px solid #3b82f6; /* 파란 테두리 */
+}
+
+.bidProdList.completed >.bidProd-picture,.bidProdList.cancelled >.bidProd-picture  {
+    border: 2px solid #fff;
+}
+
+.bidProd-picture > .checkMark {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #3b82f6;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+.bidProd-picture > .overlay-text{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width:100%;
+    height:100%;
+    font-weight: bold;
+    opacity:70%;
+}
+.bidProdList.completed .overlay-text{
+    background-color:rgba(234,105,70,1);
+}
+
+.bidProdList.cancelled .overlay-text{
+    background: rgba(0,0,0,1);
+}
+
+.bidProdList > .bidProd-btnWrap{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap:3px;
+    border: 2px solid transparent;
+    padding:5px 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+            max-height 1s ease,
+            opacity 1s ease,
+            transform 1s ease,
+            border 0.3s ease;
+    pointer-events: none;
+}
+
+
+.bidProdList:hover > .bidProd-btnWrap{
+    max-height: 150px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* 낙찰/유찰인 경우 hover 비활성화 */
+.bidProdList.completed:hover > .bidProd-btnWrap,
+.bidProdList.cancelled:hover > .bidProd-btnWrap {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bidProd-btnWrap > .bidProd{
+    width:100%;
+    font-size:12px;
+    padding:4px 0;
+    border-radius:4px;
+    color:white;
+    text-align: center;
+    cursor:pointer;
+}
+
+.bidProd.selectBtn{
+    background-color:#ff9a7e;
+}
+
+.bidProd.completeBtn{
+    background-color:#EA6946;
+}
+.bidProd.cancelBtn{
+    background-color:#B23F25;
+}
+.bidProd.unitBtn{
+    background-color: #722817;
+}
+.bidProd.revertBtn{
+    background-color:#551B10FF;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.modal-buttons button {
+    margin: 10px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    border:none;
+    transition:background-color,color 0.5s ease;
+}
+.modal-buttons button:hover{
+    background-color:#777;
+    color:white;
+}
+
+.error-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: rgba(255, 80, 80, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 999;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+ /*메인 비디오 부분*/
+
+.main-videoWrapper >.streaming-btn-wrap{
+    display:flex;
+    justify-content: space-between;
+    padding: 5px 10px 0 0;
+
+}
+.main-videoWrapper>.streaming-btn-wrap .auction-end-btn{
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    background-color: #848282;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.auction-end-btn:hover{
+    background-color: #666464;
+}
+
+.main-videoWrapper>.streaming-btn-wrap> .streaming-btn{
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    background-color:#ff9a7e;
+    color:white;
+    border-radius: 20px;
+    font-size:12px;
+    cursor:pointer;
+    transition:background-color 0.5s ease-out;
+}
+
+.main-videoWrapper>.streaming-btn-wrap> .streaming-btn.active{
+    background-color: #ea6946;
+}
+
+
+
+.contentWrap-under >.main-videoWrapper{
+    margin-top:45px;
+    width: 400px;
+    height: calc(400px * 9 / 16); /* 가로세로 비율 고정 */
+    padding-left: 40px;
+    box-sizing:border-box;
+}
+.contentWrap-under >.main-videoWrapper>.videoBox{
+    width:350px;
+    aspect-ratio: 16 / 9; /* 가로세로 비율 고정 */
+}
+.contentWrap-under >.main-videoWrapper>.videoBox>video{
+    /* 고정 너비 대신 */
+    width: 100%;
+    height:100%;
+    object-fit: cover; /* 비디오 꽉 채움 */
+    display: block;
+}
+.main-video-title{
+    font-size:25px;
+    font-weight:700;
+    padding:0 12px;
+}
+.main-video-stop{
+    width: 100%;
+    height:100%;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+/*모달창*/
+.confirmModal{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.confirm-msg-wrap{
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.confirm-msg-wrap > .confirm-msg{
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.confirm-msg-wrap > button{
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor:pointer;
+}
+
+.unitChange > p{
+    padding: 10px 0;
+}
+
+.unitChange > select{
+    width: 100%;
+    padding: 5px 5px;
+    border-radius: 4px;
+    border: 1px solid #9e9e9e;
+    outline: none;
+}

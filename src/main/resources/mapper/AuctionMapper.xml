@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.bidcast.mapper.AuctionMapper">
+
+    <select id="getAuctionHistoryByUserId" resultType="com.project.bidcast.vo.AuctionHistoryDTO" parameterType="String">
+        SELECT
+            a.auction_id AS auctionId,
+            a.title AS title,
+            a.thumbnail_url AS image,  -- 여기만 바꿈
+            a.start_time AS startTime,
+            a.end_time AS endTime,
+            a.status,
+            a.created_at AS auctionDate,
+            string_agg(DISTINCT t.tag_name, ', ') AS tags
+        FROM auction a
+                 LEFT JOIN auctiontag at ON a.auction_id = at.auc_key
+            LEFT JOIN tag t ON at.tag_key = t.tag_key
+        WHERE a.host_id = #{loginId}
+        GROUP BY a.auction_id, a.title, a.thumbnail_url, a.created_at, a.status
+        ORDER BY a.auction_id, a.start_time DESC
+    </select>
+
+
+    <select id="selectAuctionDetail" resultType="com.project.bidcast.vo.AuctionDetailDTO" parameterType="int">
+        SELECT
+            a.auction_id AS auctionId,
+            a.session,
+            a.title,
+            u.user_name AS auctioneer,
+            a.start_time AS startTime,
+            a.end_time AS endTime,
+            a.status,
+    COUNT(p.prod_key) AS itemCount
+        FROM auction a
+            LEFT JOIN product p ON a.auction_id = p.auc_key
+            LEFT JOIN users u ON a.host_id = u.login_id
+        WHERE a.auction_id = #{auctionId}
+        GROUP BY a.auction_id, a.session, a.title, u.user_name, a.status;
+    </select>
+
+    <select id="selectAuctionItemsByAuctionId" resultType="com.project.bidcast.vo.AuctionItemDTO" parameterType="int">
+        SELECT
+            p.prod_key AS prodId,
+            p.prod_name AS prodName,
+            f.file_url AS image,  -- 서브쿼리 대신 직접 컬럼 사용
+            p.final_price AS price,
+            u.nickname AS winner
+        FROM product p
+                LEFT JOIN users u ON p.winner_id = u.user_key
+                LEFT JOIN file f ON f.prod_key = p.prod_key
+        WHERE p.auc_key = #{auctionId};
+
+    </select>
+
+    <select id="selectWinningProductsByUserId" resultType="AuctionItemDTO">
+        SELECT
+            p.prod_key AS prodId,
+            p.prod_name AS prodName,
+            f.file_url AS image,
+            p.final_price AS price
+        FROM product p
+                 LEFT JOIN (
+            SELECT f1.*
+            FROM file f1
+                     JOIN (
+                SELECT prod_key, MIN(file_key) AS min_file_key
+                FROM file
+                WHERE prod_key IS NOT NULL
+                GROUP BY prod_key
+            ) f2 ON f1.file_key = f2.min_file_key
+        ) f ON p.prod_key = f.prod_key
+        WHERE p.winner_id = #{userKey}
+        ORDER BY p.prod_key DESC;
+
+    </select>
+
+
+    <select id="selectAuctionSchedule" resultType="com.project.bidcast.vo.AuctionScheduleDTO">
+        SELECT
+        a.auction_id,
+        to_char(a.start_time, 'YYYY.MM.DD') AS date,
+        a.title,
+        a.thumbnail_url AS image,  -- file 서브쿼리 대신 직접 컬럼 사용
+        a.start_time,
+        a.end_time,
+        a.status,
+        a.view_count AS guestCount,
+        u.user_name AS hostName,
+        COALESCE(string_agg(t.tag_name, ','), '') AS tags
+        FROM auction a
+        LEFT JOIN users u ON a.host_id = u.login_id
+        LEFT JOIN auctiontag at ON a.auction_id = at.auc_key
+        LEFT JOIN tag t ON at.tag_key = t.tag_key
+        <where>
+            <if test="date != null and date != ''">
+                to_char(a.start_time, 'YYYY.MM.DD') = #{date}
+            </if>
+            <if test="tag != null and tag != ''">
+                AND EXISTS (
+                SELECT 1 FROM auctiontag at2
+                JOIN tag t2 ON at2.tag_key = t2.tag_key
+                WHERE at2.auc_key = a.auction_id AND t2.tag_name = #{tag}
+                )
+            </if>
+        </where>
+        GROUP BY a.auction_id, a.start_time, a.title, a.end_time, a.status, a.view_count, u.user_name, a.thumbnail_url
+    </select>
+
+
+    <insert id="regAuction" parameterType="AuctionDTO" keyProperty="auctionId" keyColumn="auction_id" useGeneratedKeys="true">
+        INSERT INTO auction(host_id, created_at, title, start_time, status, thumbnail_url)
+        VALUES (#{hostId}, NOW(), #{title}, #{startTime}, '진행예정', #{thumbnailUrl})
+        RETURNING auction_id
+    </insert>
+
+    <select id="getOtherAuctions" resultType="AuctionTagDTO">
+        SELECT *
+        FROM auction
+        WHERE status IN ('진행중', '진행예정')
+            AND auction_id != #{auctionId}
+        ORDER BY
+            CASE status
+                WHEN '진행중' THEN 1
+                WHEN '진행예정' THEN 2
+                ELSE 3
+                END,
+            start_time ASC
+            LIMIT 4;
+    </select>
+
+    <insert id="regProduct" parameterType="ProdDTO" keyProperty="prodKey" keyColumn="prod_key" useGeneratedKeys="true">
+        INSERT INTO product (auc_key, prod_name,prod_detail,init_price)
+        VALUES (#{aucKey}, #{prodName},#{prodDetail},#{initPrice})
+        RETURNING prod_key
+    </insert>
+
+    <select id="selectAuctionsByPage" resultType="com.project.bidcast.vo.AuctionDTO">
+        SELECT
+            a.auction_id AS auctionId,
+            a.title AS title,
+            a.status,
+            a.start_time AS startTime,
+            a.end_time AS endTime,
+            a.created_at AS createdAt,
+            a.view_count AS viewCount
+        FROM auction a
+        ORDER BY a.start_time DESC
+            LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="selectAuctionsByPageAndStatus" resultType="com.project.bidcast.vo.AuctionDTO">
+        SELECT auction_id AS auctionId, title, start_time AS startTime, end_time AS endTime, status, host_id AS hostId
+        FROM auction
+        WHERE status = #{status}
+        ORDER BY start_time DESC
+            LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="selectAuctionsByPageAndFilter" resultType="com.project.bidcast.vo.AuctionDTO">
+        SELECT
+        a.auction_id AS auctionId,
+        a.title,
+        a.created_at AS createdAt,
+        a.start_time AS startTime,
+        a.end_time AS endTime,
+        a.status,
+        a.host_id AS hostId,
+        u.user_name AS hostName,
+        a.thumbnail_url AS thumbnailUrl  <!-- ✅ 수정된 부분 -->
+
+        FROM auction a
+        LEFT JOIN users u ON a.host_id = u.login_id
+
+        WHERE 1=1
+        <if test="status != null and status != ''">
+            AND LOWER(a.status) LIKE CONCAT('%', LOWER(#{status}), '%')
+        </if>
+        <if test="title != null and title != ''">
+            AND LOWER(a.title) LIKE CONCAT('%', LOWER(#{title}), '%')
+        </if>
+
+        ORDER BY a.start_time DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="searchAuctionsByTitle" resultType="com.project.bidcast.vo.AuctionDTO">
+        SELECT
+            a.auction_id,
+            a.title,
+            a.thumbnail_url AS image
+        FROM auction a
+        WHERE a.title ILIKE '%' || #{keyword} || '%';
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

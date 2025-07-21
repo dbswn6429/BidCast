@@ -1,0 +1,121 @@
+.auction-wrapper {
+    padding: 50px;
+    width: 57%;
+    margin: 0 auto;
+    min-height: 70vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.auction-title {
+    padding-bottom: 12px;
+}
+
+.auction-status {
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 6px 17px;
+    color: #fff;
+    margin-left: 20px;
+    margin-bottom: 6px;
+}
+
+.auction-status-진행예정 {
+    background-color: #0054ff; /* 파란색 */
+}
+
+.auction-status-진행중 {
+    background-color: #2fcd37; /* 초록색 */
+}
+
+.auction-status-종료 {
+    background-color: red; /* 빨간색 */
+}
+
+.auction-info {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.auction-summary{
+    display: flex;
+}
+
+.tags {
+    display: flex;
+    margin-left: 72%;
+    gap: 8px;
+}
+
+.tags span {
+    background-color: #e5e5e5;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: #333;
+}
+
+.auction-summary > span {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.auctioneer {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.auction-details > div {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.auction-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.auction-table th,
+.auction-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.auction-table thead tr {
+    background-color: #f5f5f5;
+}
+
+.auction-table tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.item-image {
+    height: 100px;
+    border-radius: 8px;
+}
+
+.bidHistory-btn {
+    padding: 10px 24px;
+    background-color: #EA6946;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    float: right;
+    cursor:pointer;
+}

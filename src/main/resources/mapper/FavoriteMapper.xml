@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.bidcast.mapper.FavoriteMapper">
+
+    <insert id="insertLike">
+        INSERT INTO likelist (user_key, auc_key)
+        VALUES (#{userKey}, #{auc_key})
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM likelist
+        WHERE user_key = #{userKey}
+          AND auc_key = #{auc_key}
+    </delete>
+
+    <select id="existsFavorite" resultType="boolean">
+        SELECT EXISTS (
+            SELECT 1
+            FROM likelist
+            WHERE user_key = #{userKey}
+              AND auc_key = #{auc_key}
+        )
+    </select>
+
+
+    <select id="selectLikedAuctionsIdsByUser" resultType="int">
+        SELECT auc_key
+        FROM likelist
+        WHERE user_key = #{userKey}
+    </select>
+
+    <select id="selectLikedAuctionsByUser" resultType="com.project.bidcast.vo.AuctionScheduleDTO">
+        SELECT
+            a.auction_id,
+            a.title,
+            a.thumbnail_url AS image
+        FROM likelist l
+                 JOIN auction a ON l.auc_key = a.auction_id
+        WHERE l.user_key = #{userKey}
+
+    </select>
+
+
+</mapper>

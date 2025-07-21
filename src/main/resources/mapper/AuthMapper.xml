@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.bidcast.mapper.AuthMapper">
+    <!-- 위의 3줄 필수로 넣기! -->
+    <!-- namespace에는 구현할 인터페이스의 풀 패키지 명을 넣어줘야 한다. -->
+    <!-- 여기서부터 sql 구문을 작성한다. id는 인터페이스에서 선언한 메서드명. ;는 생략 -->
+    <!-- SELECT구문은 resultType을 적고 반환받을 타입을 반드시 넣어야한다. -->
+
+
+    <insert id="createUser">
+        INSERT INTO users (login_id, user_name, birth, phone, email, pw, nickname, created_at)
+        VALUES (#{loginId}, #{userName}, #{birth}, #{phone}, #{email}, #{pw}, #{nickName}, NOW())
+    </insert>
+
+    <select id="getUserByLoginId" resultType="com.project.bidcast.vo.UsersDTO">
+        SELECT * FROM users WHERE login_id = #{loginId}
+    </select>
+
+    <select id="searchId" resultType="com.project.bidcast.vo.UsersDTO">
+        SELECT * FROM users WHERE user_name = #{userName} AND email = #{email} AND phone = #{phone}
+    </select>
+
+    <select id="searchPw" resultType="com.project.bidcast.vo.UsersDTO">
+        SELECT * FROM users WHERE login_id = #{loginId} AND user_name = #{userName} AND email = #{email} AND phone = #{phone}
+    </select>
+
+    <update id="changePw">
+        UPDATE users SET pw = #{pw} WHERE user_Key = #{userKey}
+    </update>
+
+    <update id="updateUser">
+        UPDATE users
+        SET  birth = #{birth}, phone = #{phone}, email = #{email}, nickname = #{nickName}
+        WHERE user_key = #{userKey}
+    </update>
+
+    <update id="deleteUser">
+        UPDATE users
+        SET user_name = '탈퇴한회원', login_id = NULL, pw = NULL, birth = NULL, phone = NULL, email = NULL, nickname = '탈퇴한회원'
+        WHERE user_key = #{userKey}
+    </update>
+</mapper>

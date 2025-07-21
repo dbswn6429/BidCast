@@ -1,0 +1,291 @@
+@import '../MenuBtn/MenuBtn.css';
+
+.dashboard-container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    padding: 0 32px;
+    position: relative;
+    /*padding-bottom: 60px;*/
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: flex-start;*/
+    margin-top: 32px;
+    gap: 50px;
+}
+
+.slide-image {
+    width: 750px;
+    height: 326px;
+    border-radius: 33px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    margin-top: 0;
+}
+
+.main-actions {
+    display: flex;
+    gap: 27px;
+    width: 100%;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    padding: 25px 0 20px 0;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    cursor: pointer;
+}
+
+.action-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.action-label {
+    color: #222;
+    letter-spacing: -1px;
+}
+
+.login-section {
+    width: 100%;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 11px 0 2px;
+}
+
+
+
+.btn.login {
+    align-items: center;
+    background: #EA6946;
+    color: #fff;
+    border: none;
+    border-radius: 17px;
+    font-size: 18px;
+    padding: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #f36d3b14;
+    margin: 10px;
+}
+
+.signup-row {
+    width: 90%;
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    color: #666;
+    margin-right: 5px;
+}
+
+.my-page{
+    font-size: 12px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.signup-link {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.login-desc {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: #888;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.welcome-message {
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.logout-wrap{
+    display:flex;
+    justify-content: flex-end;
+    margin: 0 24px 10px 0;
+    gap: 155px;
+}
+
+.logout-btn {
+    height: 25px;
+    width: 50px;
+    background-color: #EA6946;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+.notice {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 12px 18px;
+    margin: 24px 0 16px 0;
+    font-size: 14px;
+    color: #666;
+    border-radius: 35px;
+}
+
+.main-section {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 89%;
+    padding: 40px 60px;
+    border: 1px solid #e3e5e8;
+    background-color: #fff;
+}
+
+
+.calendar-section {
+    width: 40%;
+    padding: 0 0 0 24px;
+    border-right: 1px solid #d5d5d5;
+}
+
+.calendar-tab {
+    background: #EA6946;
+    color: #fff;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    padding: 8px 22px;
+    font-size: 17px;
+    margin-bottom: 0;
+}
+
+.calendar-tab.active {
+    background: #EA6946;
+}
+
+.calendar-container>.calendar-header >span{
+    font-family: 'Jua', sans-serif;
+}
+
+.calendar-container > .calendar-header > button{
+    border:1px solid rgba(0,0,0,0.3);
+    border-radius:4px;
+    padding: 3px 9px;
+}
+.calendar-grid div{
+    font-family: 'Jua', sans-serif;
+}
+
+.auction-list {
+    flex: 1;
+    padding: 0 32px;
+}
+
+.auction-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #d5d5d5;
+    padding-bottom: 12px;
+}
+
+.auction-date {
+    font-size: 30px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: #222;
+    font-family: 'Jua', sans-serif;
+}
+
+.auction-date .today-label {
+    font-size: 15px;
+    color: #888;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.auction-dropdown {
+    font-size: 15px;
+    color: #888;
+    cursor: pointer;
+    margin-top: 8px;
+    white-space: nowrap;
+}
+
+.auction-list h3 {
+    font-size: 24px;
+    margin: 18px 0 18px 0;
+    color: #111;
+}
+
+
+.auction-two-column-list {
+    display: flex;
+    gap: 32px;
+    margin-top: 20px;
+}
+
+.auction-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.auction-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.auction-icon {
+    border-radius:7px;
+    padding : 6px 8px 4px;
+    border:none;
+}
+
+
+.auction-icon .calendar-img {
+    width: 40px;
+    height: 40px;
+}
+
+.auction-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auction-title {
+    font-size: 1.08em;
+    color: #222;
+}
+
+.auction-time {
+    font-size: 0.98em;
+    color: #888;
+    margin-top: 2px;
+}
