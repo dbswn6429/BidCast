@@ -5,7 +5,7 @@
 실시간 채팅, 영상 공유, 입찰 기능을 통해 생동감 있는 경매 경험을 제공합니다.
 
 🔗 [BIDCAST 서버 GitHub](https://github.com/KR-HS/BidCast_Server)
-🔗 [BIDCAST 클라이언트 GitHub](https://github.com/KR-HS/BidCast) 
+🔗 [BIDCAST 클라이언트 GitHub](https://github.com/dbswn6429/BidCast) 
 🌐 [BIDCAST 홈페이지](https://bidcast.kro.kr)
 
 ---
